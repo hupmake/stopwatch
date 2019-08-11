@@ -2,7 +2,7 @@
 # Python program that runs a stopwatch. Start, stop, reset, etc.
 # So far, it will count seconds, minutes, and hours. It just goes. Stops on CTRL+C.
 
-# version 0.2.0
+# version 0.2.1
 
 # Imports!
 # This is running on Linux, so we'll just do linuxy imports.
@@ -11,64 +11,42 @@ import sys
 
 # Building blocks!
 
-hour_0 = 0
-hour_1 = 0
-mins_0 = 0
-mins_1 = 0
-secs_0 = 0
-secs_1 = 0
-key_press = input('Press s to start timer...')
+hour = 0
+mins = 0
+secs = 0
+#timerContinue = 1
 
 def run_time():
-	global hour_0
-	global hour_1
-	global mins_0
-	global mins_1
-	global secs_0
-	global secs_1
-	time_string = str(hour_0) + str(hour_1) + str(":") + str(mins_0) + str(mins_1) + str(":") + str(secs_0) + str(secs_1)
+	global hour
+	global mins
+	global secs
+	time_string = str("{0:0=2d}".format(hour)) + str("h ") + str("{0:0=2d}".format(mins)) + str("m ") + str("{0:0=2d}".format(secs)) + str("s")
 
 	print(time_string, end = '')
 	print('\r', end = '', flush = 'True')
 
-	if hour_1 == 9 and mins_0 == 5 and mins_1 == 9 and secs_0 == 5 and secs_1 == 9:
-		secs_0 = 0
-		secs_1 = 0
-		mins_0 = 0
-		mins_1 = 0
-		hour_0 +=1
-		hour_1 = 0
+	if hour == 23 and mins == 59 and secs == 59:
+		hour = 0
+		mins = 0
+		secs = 0
+#		timerContinue = 0
+		print("1 day reached. Timer ended.")
 		time.sleep(1)
 
-	elif mins_0 == 5 and mins_1 == 9 and secs_0 == 5 and secs_1 == 9:
-		secs_0 = 0
-		secs_1 = 0
-		mins_0 = 0
-		mins_1 = 0
-		hour_1 +=1
+	elif mins == 59 and secs == 59:
+		secs = 0
+		mins = 0
+		hour +=1
 		time.sleep(1)
 
-	elif mins_1 == 9 and secs_0 == 5 and secs_1 == 9:
-		secs_0 = 0
-		secs_1 = 0
-		mins_0 += 1
-		mins_1 = 0
+	elif secs == 59:
+		secs = 0
+		mins += 1
 		time.sleep(1)
 
-	elif secs_0 == 5 and secs_1 == 9:
-		secs_0 = 0
-		secs_1 = 0
-		mins_1 += 1
+	elif secs < 59:
+		secs += 1
 		time.sleep(1)
 
-	elif secs_1 < 9:
-		secs_1 += 1
-		time.sleep(1)
-
-	elif secs_1 == 9:
-		secs_1 = 0
-		secs_0 += 1
-		time.sleep(1)
-
-while key_press == "s":
+while True:
 	run_time()
