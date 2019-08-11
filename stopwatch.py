@@ -3,7 +3,7 @@
 # So far, it will count seconds, minutes, and hours. It just goes.
 # Stops on Ctrl-C and outputs the recorded time.
 
-# version 0.2.1
+# version 1.0.0
 
 # Imports!
 import time
@@ -36,16 +36,16 @@ def run_time():
 		secs = 0
 		mins = 0
 		hour +=1
-		time.sleep(.001)
+		time.sleep(1)
 
 	elif secs == 59:
 		secs = 0
 		mins += 1
-		time.sleep(.001)
+		time.sleep(1)
 
 	elif secs < 59:
 		secs += 1
-		time.sleep(.001)
+		time.sleep(1)
 
 while True:
 	try:
